@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 from sklearn.cluster import DBSCAN
 
@@ -21,7 +20,7 @@ labelEncoder.fit(dataset['id_transacao'])
 dataset['id_transacao'] = labelEncoder.transform(dataset['id_transacao'])
 
 # Data preparation
-np_dataset3 = np.array(dataset3)
+np_dataset3 = dataset[].
 np_dataset3 = np_dataset3.astype(np.double)
 CustoAquisicao = np_dataset3[:,0]
 PrecoVenda = np_dataset3[:,1]
