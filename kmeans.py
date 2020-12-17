@@ -16,26 +16,28 @@ cf.set_config_file(offline=False, world_readable=True)
 
 print("Algoritmos de Clustering: K-means\n")
 
-# 5 cluster: horario pedido, localidade, nome_item
+# 5 cluster:  nome_item
 # random: Se refere ao modo de inicialização de forma aleatória,
-#    ou seja, os centróides iniciais serão gerados de forma totalmente aleatória sem um critério para seleção
+#    ou seja, os centróides iniciais serão gerados de forma
+#    totalmente aleatória sem um critério para seleção
 kmeans = KMeans(n_clusters = 5, init = 'random')
 
 # Recebendo os dados do dataset
 dataset = pd.read_csv("dataset.csv")
-print("Os 5 primeiras linhas:")
-print(dataset.head())
+# print("Os 5 primeiras linhas:")
+# print(dataset.head())
 
-print("\nVenda Acumulativa")
-data_nome_item = dataset.loc[:, ['nome_item']]
-print(data_nome_item)
+# print("\nVenda Acumulativa")
+# data_nome_item = dataset.loc[:, ['nome_item']]
+# print(data_nome_item)
+#
+# #data_nome_item["nome_item"].iplot(kind="bar")
+#
+# data_nome_item.nome_item.value_counts().iplot(kind='bar', title='Status dos pedidos')
+#
+# data_parcial = dataset.iloc[:,3:5]
+# print(data_parcial.groupby(['nome_item'])['quantidade_item'].agg('sum'))
 
-#data_nome_item["nome_item"].iplot(kind="bar")
-
-data_nome_item.nome_item.value_counts().iplot(kind='bar', title='Status dos pedidos')
-
-data_parcial = dataset.iloc[:,3:5]
-print(data_parcial.groupby(['nome_item'])['quantidade_item'].agg('sum'))
 #print(dataset.groupby(by=['Fruit','Date']).sum().groupby(level=[0]).cumsum())
 #print(dataset.groupby(by=['nome_item','quantidade_item']).sum())
 
@@ -55,15 +57,16 @@ dataset['horario_pedido'] = labelEncoder.transform(dataset['horario_pedido'])
 labelEncoder.fit(dataset['id_transacao'])
 dataset['id_transacao'] = labelEncoder.transform(dataset['id_transacao'])
 
-print("\n Os 5 primeiras linhas, depois da representação:")
-print(dataset.head())
+# print("\n Os 5 primeiras linhas, depois da representação:")
+# print(dataset.head())
 
 
-print("\n Dendrograma")
-dados = dataset.values
-h = linkage(dados, method='complete', metric='euclidean')
-dendrogram(h)
-pyplot.show()
+# print("\n Dendrograma")
+# dados = dataset.values
+# h = linkage(dados, method='complete', metric='euclidean')
+# dendrogram(h)
+# pyplot.show()
+
 #rotulos_dist = fcluster(h, t=7.5, criterion='distance')
 #rotulos_k = fcluster(h, t=3, criterion='maxclust')
 
@@ -89,7 +92,7 @@ print("\n Retorna os labels de cada instâncias: ")
 print(labels)
 
 # Método Elbow
-#wcss = []
+wcss = []
 
 # print("\n Encontrar valor ideal de k(nº de clustering ideal): ")
 # for i in range(1, 11):
@@ -108,13 +111,13 @@ print(labels)
 
 
 # Colunas:
-#df.iloc[:,0] # Todos os dados da primeira coluna do dataset
-#df.iloc[0:5,-1] # Do primeiro ao quinto dado da última coluna
+# df.iloc[:,0] # Todos os dados da primeira coluna do dataset
+# df.iloc[0:5,-1] # Do primeiro ao quinto dado da última coluna
 
-# plt.scatter(dataset.iloc[:, 0], dataset.iloc[:,1], s = 100, c = kmeans.labels_)
-# plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'red',label = 'Centroids')
-# plt.title('Clusters and Centroids')
-# plt.xlabel('horario_pedido')
-# plt.ylabel('id_transacao')
-# plt.legend()
-# plt.show()
+plt.scatter(dataset.iloc[:, 0], dataset.iloc[:,1], s = 100, c = kmeans.labels_)
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'red',label = 'Centroids')
+plt.title('Clusters and Centroids')
+plt.xlabel('horario_pedido')
+plt.ylabel('id_transacao')
+plt.legend()
+plt.show()
